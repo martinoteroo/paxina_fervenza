@@ -212,3 +212,47 @@ body {
         font-size: 2rem;
     }
 }
+
+
+/* =========================================
+   ANIMACIÓN DE CARGA UNIVERSAL
+   ========================================= */
+.caja-cargando {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    width: 100%;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    /* Un borde gris muy clarito de fondo */
+    border: 5px solid #e2e8f0; 
+    /* El borde de arriba lleva tu color rojo de acento para que destaque */
+    border-top: 5px solid #5b8ed1 ; 
+    border-radius: 50%; /* Esto lo hace redondo */
+    /* La magia: le decimos que gire infinitamente */
+    animation: girar 1s linear infinite; 
+    margin-bottom: 15px;
+}
+
+.caja-cargando p {
+    color: var(--color-principal);
+    font-weight: bold;
+    /* Un pequeño efecto de parpadeo suave para el texto */
+    animation: latido 1.5s infinite ease-in-out; 
+}
+
+/* Los "Keyframes" son las instrucciones de movimiento */
+@keyframes girar {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes latido {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}

@@ -1,45 +1,67 @@
 // Tu enlace largo del Excel (terminado en pub?output=csv)
     const enlaceExcel = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRV68SLA6ujZ0jgGkiknu16IUsFDcZtter5q1ZGy-8MLMckzSi76WrQMI0Yv_sYOLe5svMvrFLbk7o4/pub?output=csv";
 
+    // Declaramos las variables para controlar el scroll
+    let todasLasNoticias = [];  
+    let noticiasMostradas = 0;
+    const noticiasPorCarga = 6;
+
     Papa.parse(enlaceExcel, {
         download: true,
         header: true,
         complete: function(resultados) {
             
-            let todasLasNoticias = resultados.data;
-
             // 1. Limpiamos filas vacías por si dejaste algún hueco en el Excel
-            let noticiasValidas = todasLasNoticias.filter(noticia => noticia.Titulo && noticia.Titulo.trim() !== "");
+            let noticiasValidas = resultados.data.filter(noticia => noticia.Titulo && noticia.Titulo.trim() !== "");
 
-            // 2. Le damos la vuelta para que las de abajo del Excel (las más nuevas) salgan primero
-            let noticiasNuevas = noticiasValidas.reverse();
+            // 2. Le damos la vuelta y lo guardamos en la variable GLOBAL (sin usar 'let' aquí)
+            todasLasNoticias = noticiasValidas.reverse();
 
-            // 3. Cortamos la lista para quedarnos SOLO con las 3 primeras (Ideal para la portada)
-            let ultimasTres = noticiasNuevas.slice(0, 5);
+            // 3. Vaciamos el cargando
+            document.getElementById("contenedor-principal-noticias").innerHTML = "";
 
-            let cajaPrincipal = document.getElementById("contenedor-principal-noticias");
-            let contenidoHTML = "";
+            // 4. Hacemos la primera carga
+            dibujarSiguienteLote();   
+        }
+    });
 
-            // 4. Dibujamos el HTML por cada noticia
-            ultimasTres.forEach(function(noticia) {
-                
-                // Hacemos un resumen del texto para no saturar la portada (corta a los 220 caracteres)
-                let textoResumen = noticia.Texto.substring(0, 250) + "...";
+    function dibujarSiguienteLote() {
+        let cajaPrincipal = document.getElementById("contenedor-principal-noticias");
+        
+        // Si no hay más noticias que mostrar, paramos la función
+        if (noticiasMostradas >= todasLasNoticias.length) return; 
 
-                contenidoHTML += `
-                    <article class="tarjeta-noticia">
-                        <h3>${noticia.Titulo}</h3>
-                        <p><small> ${noticia.Fecha}</small></p>
-                        <p>${textoResumen}</p>
-                        
-                        <!-- MAGIA: El botón apunta a noticia.html pasándole el ID exacto -->
-                        <br>
-                        <a href="pezas/noticia.html?id=${noticia.ID}" class="btn-principal" style="font-size: 0.9rem; padding: 8px 15px;">Leer comunicado completo</a>
-                    </article>
-                `;
-            });
+        // Cortamos el lote que toca mostrar
+        let lote = todasLasNoticias.slice(noticiasMostradas, noticiasMostradas + noticiasPorCarga); 
+        let contenidoHTML = "";
 
-            // Sustituimos el "Cargando..." por las tarjetas reales
-            cajaPrincipal.innerHTML = contenidoHTML;
+        // Recorremos el lote
+        lote.forEach(function(noticia) {
+            let textoSeguro = noticia.Texto ? noticia.Texto : "";
+            let textoResumen = textoSeguro.substring(0, 120) + "...";
+
+            contenidoHTML += `
+                <article class="tarjeta-noticia">
+                    <h3>${noticia.Titulo}</h3>
+                    <p><small> ${noticia.Fecha}</small></p>
+                    <p>${textoResumen}</p>
+                    <br>
+                    <a href="noticia.html?id=${noticia.ID}" class="btn-principal" style="font-size: 0.9rem; padding: 8px 15px;">Leer comunicado completo</a>
+                </article>
+            `;
+        }); // <-- Aquí es donde estaba el fallo de las llaves. Esto cierra el forEach.
+
+        // Inyectamos el HTML en la web
+        cajaPrincipal.innerHTML += contenidoHTML;
+        
+        // Actualizamos el contador
+        noticiasMostradas += noticiasPorCarga;
+    }
+
+    // El evento del scroll infinito
+    window.addEventListener('scroll', function() {
+        // Calculamos si el usuario ha bajado casi hasta el final de la página (a 200 píxeles del final)
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+            dibujarSiguienteLote();
         }
     });
