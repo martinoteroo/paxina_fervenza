@@ -5,21 +5,21 @@
 
 
 // Pezas comuns en varias páxinas. Importar dende o script e ligar co ID
-    fetch('../pezas/nav.html')
+    fetch('paxina_fervenza/pezas/nav.html')
         .then(respuesta => respuesta.text())
         .then(codigoHtml => {
             // Cuando lo tenga, lo mete dentro de nuestro hueco
             document.getElementById('contenedor-menu').innerHTML = codigoHtml;
         });
 
-    fetch('../pezas/pe.html')
+    fetch('paxina_fervenza/pezas/pe.html')
         .then(respuesta => respuesta.text())
         .then(codigoHtml => {
             // Cuando lo tenga, lo mete dentro de nuestro hueco
             document.getElementById('contenedor-footer').innerHTML = codigoHtml;
         });
 
-    fetch('../pezas/lateral.html')
+    fetch('paxina_fervenza/pezas/lateral.html')
         .then(respuesta => respuesta.text())
         .then(codigoHtml => {
             // Cuando lo tenga, lo mete dentro de nuestro hueco
