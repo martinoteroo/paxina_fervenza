@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comunicado - Sindicato S.I.T.</title>
-    <link rel="stylesheet" href="estilos_xerais.css">
+    <link rel="stylesheet" href="../estilos_xerais.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* Unos pequeños ajustes extra para que el artículo grande se vea bonito */
@@ -20,20 +20,12 @@
 </head>
 <body>
 
-    <!-- CABECERA BÁSICA -->
-    <header class="cabecera-principal">
-        <div class="logo"><h1>Sindicato S.I.T.</h1></div>
-        <nav class="menu-principal">
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="publicaciones.html">Comunicados</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Hueco para el menú común -->
+    <div id="contenedor-menu"></div>
 
     <!-- CONTENEDOR DEL ARTÍCULO -->
     <main class="contenedor-principal" style="display: block;">
-        <a href="index.html" class="btn-volver">← Volver al inicio</a>
+        <a href="/" class="btn-volver">← Volver al inicio</a>
         
         <div id="caja-articulo">
             <p>⏳ Cargando el comunicado...</p>
@@ -96,5 +88,6 @@
             });
         }
     </script>
+    <script src="../scripts/xeral.js"></script>
 </body>
 </html>

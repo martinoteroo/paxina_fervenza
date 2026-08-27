@@ -51,6 +51,12 @@ body {
     align-items: center;
 }
 
+#contenedor-menu {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
 .menu-principal a {
     text-decoration: none;
     color: var(--color-texto);
