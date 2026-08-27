@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fervenza</title>
+    
+    <!-- Estilos xerais -->
+    <link rel="stylesheet" href="estilos_xerais.css">
+    
+    <!-- (Opcional) Fuente tipográfica limpia de Google Fonts para darle un toque profesional -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- CABECERA Y MENÚ DE NAVEGACIÓN -->
+    <header class="cabecera-principal">
+        <div class="menu-principal">
+            <h1><a href="index.html">Fervenza</a></h1>
+        </div>
+        <nav class="menu-principal">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="publicacions.html">Publicacións</a></li>
+                <li><a href="#">Voceiro</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- SECCIÓN DESTACADA (HERO) -->
+    <section class="hero">
+        <div class="hero-contenido">
+            <h2>Organízate e loita!!</h2>
+            <p>Se Galiza fose o país dos mil ríos, nos quixeramos ser a súa máis alta Fervenza.</p>
+            <a href="#" class="btn-principal">Milita</a>
+        </div>
+    </section>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenedor-principal">
+        
+        <!-- SECCIÓN DE NOTICIAS (Aquí actuará tu JavaScript después) -->
+        <section id="noticias" class="seccion-noticias">
+            <h2>Últimos Comunicados</h2>
+            <div id="contenedor-noticias" class="grid-noticias">
+    <p>⏳ Cargando últimos comunicados...</p>
+</div>
+            
+            
+            <!-- Este es el contenedor vacío que rellenará el Excel -->
+            <div id="contenedor-noticias" class="grid-noticias">
+                <!-- Por ahora ponemos una noticia estática de ejemplo para que puedas ir dándole estilos en tu CSS -->
+                
+            </div>
+        </section>
+
+        <!-- BARRA LATERAL (Enlaces rápidos) -->
+        <aside class="barra-lateral">
+            <div class="caja-enlaces">
+                <h3>Ligazóns de interese</h3>
+                <ul>
+                    <li><a href="#">Erguer - Enemigos da Galiza</a></li>
+                    <li><a href="#">Creba Trotskista</a></li>
+                    <li><a href="#">Instagram de Gonzalo Dios Calviño</a></li>
+                </ul>
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="pie-pagina">
+        <div class="footer-info">
+            <p>&copy; 2026 Sindicato Independiente de Trabajadores.</p>
+            <p>Sede central: Calle Libertad 45, Madrid | Teléfono: 900 123 456</p>
+        </div>
+    </footer>
+
+    <!-- Más adelante pegaremos aquí abajo el <script> de PapaParse y el Excel -->
+
+
+
+        <!-- 1. Cargamos el motor de PapaParse -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+<!-- 2. Nuestro código personalizado -->
+<script>
+    // Tu enlace largo del Excel (terminado en pub?output=csv)
+    const enlaceExcel = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRV68SLA6ujZ0jgGkiknu16IUsFDcZtter5q1ZGy-8MLMckzSi76WrQMI0Yv_sYOLe5svMvrFLbk7o4/pub?output=csv";
+
+    Papa.parse(enlaceExcel, {
+        download: true,
+        header: true,
+        complete: function(resultados) {
+            
+            let todasLasNoticias = resultados.data;
+
+            // 1. Limpiamos filas vacías por si dejaste algún hueco en el Excel
+            let noticiasValidas = todasLasNoticias.filter(noticia => noticia.Titulo && noticia.Titulo.trim() !== "");
+
+            // 2. Le damos la vuelta para que las de abajo del Excel (las más nuevas) salgan primero
+            let noticiasNuevas = noticiasValidas.reverse();
+
+            // 3. Cortamos la lista para quedarnos SOLO con las 3 primeras (Ideal para la portada)
+            let ultimasTres = noticiasNuevas.slice(0, 3);
+
+            let cajaPrincipal = document.getElementById("contenedor-noticias");
+            let contenidoHTML = "";
+
+            // 4. Dibujamos el HTML por cada noticia
+            ultimasTres.forEach(function(noticia) {
+                
+                // Hacemos un resumen del texto para no saturar la portada (corta a los 120 caracteres)
+                let textoResumen = noticia.Texto.substring(0, 220) + "...";
+
+                contenidoHTML += `
+                    <article class="tarjeta-noticia">
+                        <h3>${noticia.Titulo}</h3>
+                        <p><small>📅 ${noticia.Fecha}</small></p>
+                        <p>${textoResumen}</p>
+                        
+                        <!-- MAGIA: El botón apunta a noticia.html pasándole el ID exacto -->
+                        <br>
+                        <a href="noticia.html?id=${noticia.ID}" class="btn-principal" style="font-size: 0.9rem; padding: 8px 15px;">Leer comunicado completo</a>
+                    </article>
+                `;
+            });
+
+            // Sustituimos el "Cargando..." por las tarjetas reales
+            cajaPrincipal.innerHTML = contenidoHTML;
+        }
+    });
+</script>
+</body>
+</html>

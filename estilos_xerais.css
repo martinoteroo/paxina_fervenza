@@ -1,0 +1,208 @@
+/* =========================================
+   1. COLORES Y CONFIGURACIÓN BÁSICA
+   ========================================= */
+:root {
+    --color-principal: #1d792f; /* Verde fervenza */
+    --color-acento: #e53e3e;    /* Rojo fuerte para destacar (botones) */
+    --color-fondo: #f4f7f6;     /* Gris muy clarito para el fondo */
+    --color-texto: #333333;
+    --blanco: #dcdcdc;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+}
+
+/* =========================================
+   2. CABECERA Y MENÚ (FLEXBOX)
+   ========================================= */
+.cabecera-principal {
+    background-color: var(--blanco);
+    display: flex;
+    justify-content: space-between; /* Separa el logo a la izq y menú a la der */
+    align-items: center;
+    padding: 15px 5%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    
+    /* Magia para que el menú persiga al usuario al bajar */
+    position: sticky; 
+    top: 0;
+    z-index: 1000;
+}
+
+.logo h1 {
+    color: var(--color-principal);
+    font-size: 1.5rem;
+}
+
+.menu-principal ul {
+    display: flex;
+    list-style: none;
+    gap: 25px; /* Separación entre los enlaces */
+    align-items: center;
+}
+
+.menu-principal a {
+    text-decoration: none;
+    color: var(--color-texto);
+    font-weight: bold;
+    transition: color 0.3s ease; /* Efecto suave al pasar el ratón */
+}
+
+.menu-principal a:hover {
+    color: var(--color-acento);
+}
+
+.logo a:hover {
+    color: var(--color-acento);
+}
+
+.btn-destacado {
+    background-color: var(--color-acento);
+    color: var(--blanco) !important;
+    padding: 8px 18px;
+    border-radius: 5px;
+}
+
+.btn-destacado:hover {
+    background-color: #c53030; /* Un rojo más oscuro al pasar el ratón */
+}
+
+/* =========================================
+   3. SECCIÓN DESTACADA (HERO)
+   ========================================= */
+.hero {
+    /* Degradado azul de fondo */
+    background: linear-gradient(135deg, var(--color-principal), #115d53);
+    color: var(--blanco);
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin: 0 auto 30px auto; /* Centra el párrafo */
+}
+
+.btn-principal {
+    background-color: var(--blanco);
+    color: var(--color-principal);
+    text-decoration: none;
+    padding: 12px 25px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.btn-principal:hover {
+    background-color: #e2e8f0;
+}
+
+/* =========================================
+   4. ESTRUCTURA PRINCIPAL (GRID)
+   ========================================= */
+.contenedor-principal {
+    display: grid;
+    /* Divide la pantalla: 2 partes para noticias, 1 parte para barra lateral */
+    grid-template-columns: 2fr 1fr; 
+    gap: 40px;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+/* Diseño de las tarjetas blancas */
+.tarjeta-noticia, .caja-enlaces {
+    background-color: var(--blanco);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.tarjeta-noticia h3, .caja-enlaces h3 {
+    color: var(--color-principal);
+    margin-bottom: 15px;
+}
+
+.caja-enlaces ul {
+    list-style: none;
+}
+
+.caja-enlaces li {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.caja-enlaces a {
+    text-decoration: none;
+    color: var(--color-texto);
+    font-weight: bold;
+}
+
+.caja-enlaces a:hover {
+    color: var(--color-acento);
+}
+
+/* =========================================
+   5. PIE DE PÁGINA
+   ========================================= */
+.pie-pagina {
+    background-color: #1a202c;
+    color: #a0aec0;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 40px;
+}
+
+/* =========================================
+   6. MÓVILES (¡Aquí está la magia de adaptarse!)
+   ========================================= */
+@media (max-width: 768px) {
+    
+    /* Cabecera: Apila el logo y el menú uno debajo del otro */
+    .cabecera-principal {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    /* Menú: Pone los enlaces en forma de columna (uno debajo de otro) */
+    .menu-principal ul {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+    }
+
+    /* Cambia la estructura Grid a 1 sola columna.
+       Así la barra lateral cae abajo del todo y no se aplasta. */
+    .contenedor-principal {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero {
+        padding: 50px 20px;
+    }
+    
+    .hero h2 {
+        font-size: 2rem;
+    }
+}
