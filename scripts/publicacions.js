@@ -42,7 +42,7 @@
 
             contenidoHTML += `
                 <article class="tarjeta-noticia">
-                    <a href="/pezas/noticia.html?id=${noticia.ID}" class="enlace-tarjeta-entera1">
+                    <a href="../noticia.html?id=${noticia.ID}" class="enlace-tarjeta-entera1">
                         <h3>${noticia.Titulo}</h3>
                         <p><small> ${noticia.Fecha}</small></p>
                         <p>${textoResumen}</p>
