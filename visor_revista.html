@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visor de Revista - Sindicato S.I.T.</title>
+    <link rel="stylesheet" href="estilos_generales.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .contenedor-visor { max-width: 1000px; margin: 0 auto; padding: 20px; text-align: center; }
+        .cabecera-visor { text-align: left; margin-bottom: 20px; }
+        .btn-volver { display: inline-block; color: var(--color-principal); text-decoration: none; font-weight: bold; margin-bottom: 20px;}
+        .btn-volver:hover { color: var(--color-acento); }
+        /* El tamaño del visor de PDF */
+        .iframe-revista { width: 100%; height: 80vh; border: none; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+    </style>
+</head>
+<body>
+
+    <!-- El menú inyectado por JS -->
+    <div id="contenedor-menu"></div>
+
+    <main class="contenedor-principal" style="display: block;">
+        <div class="contenedor-visor">
+            
+            <div class="cabecera-visor">
+                <!-- Usamos el truco de retroceder como en los navegadores -->
+                <a href="javascript:history.back()" class="btn-volver">← Volver a la hemeroteca</a>
+            </div>
+            
+            <div id="caja-visor">
+                <!-- Animación de carga -->
+                <div class="caja-cargando">
+                    <div class="spinner"></div>
+                    <p>Preparando visor de lectura...</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- El pie de página inyectado por JS -->
+    <div id="contenedor-footer"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="menu.js"></script>
+    
+    <script>
+        // 1. Extraemos el ID de la URL
+        const parametrosURL = new URLSearchParams(window.location.search);
+        const idBuscado = parametrosURL.get('id');
+
+        // PEGA AQUÍ EL ENLACE DEL EXCEL DE LAS REVISTAS
+        const enlaceRevistas = "PEGA_AQUI_EL_ENLACE_DEL_EXCEL_DE_LAS_REVISTAS";
+
+        if (!idBuscado) {
+            document.getElementById("caja-visor").innerHTML = "<p>❌ Error: No se ha seleccionado ninguna revista.</p>";
+        } else {
+            Papa.parse(enlaceRevistas, {
+                download: true,
+                header: true,
+                complete: function(resultados) {
+                    // Buscamos la revista exacta
+                    let revistaEncontrada = resultados.data.find(revista => revista.ID === idBuscado);
+                    let cajaVisor = document.getElementById("caja-visor");
+
+                    if (revistaEncontrada) {
+                        // LA MAGIA AUTOMÁTICA: Cambiamos /view por /preview
+                        let enlacePDF = revistaEncontrada.PDF;
+                        if(enlacePDF.includes('/view')) {
+                            // Esto corta el enlace donde pone /view y le añade /preview
+                            enlacePDF = enlacePDF.split('/view')[0] + '/preview';
+                        }
+
+                        // Dibujamos el título y el iframe (visor) gigante
+                        cajaVisor.innerHTML = `
+                            <h2 style="color: var(--color-principal); margin-bottom: 5px;">${revistaEncontrada.Titulo}</h2>
+                            <p style="color: #666; margin-bottom: 20px;">Edición: ${revistaEncontrada.Mes}</p>
+                            
+                            <iframe src="${enlacePDF}" class="iframe-revista" allow="autoplay"></iframe>
+                        `;
+                    } else {
+                        cajaVisor.innerHTML = "<p>❌ Lo sentimos, no hemos encontrado esta revista.</p>";
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

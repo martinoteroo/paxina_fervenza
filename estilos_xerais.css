@@ -2,8 +2,8 @@
    1. COLORES Y CONFIGURACIÓN BÁSICA
    ========================================= */
 :root {
-    --color-principal: #1d792f; /* Verde fervenza */
-    --color-acento: #e53e3e;    /* Rojo fuerte para destacar (botones) */
+    --color-principal: #0d4117; /* Verde fervenza */
+    --color-acento: #3e41e5;    /* Rojo fuerte para destacar (botones) */
     --color-fondo: #f4f7f6;     /* Gris muy clarito para el fondo */
     --color-texto: #333333;
     --blanco: #dcdcdc;
@@ -87,8 +87,32 @@ body {
    3. SECCIÓN DESTACADA (HERO)
    ========================================= */
 .hero {
-    /* Degradado azul de fondo */
-    background: linear-gradient(135deg, var(--color-principal), #115d53);
+    background: 
+        /* 1. Capa superior: Degradado de verde oscuro a negro (0.85 es la opacidad) */
+        linear-gradient(
+            rgba(20, 50, 30, 0.85), /* Verde muy oscuro arriba */
+            rgba(0, 0, 0, 0.95)     /* Casi negro abajo del todo */
+        ),
+        /* 2. Capa inferior: La foto */
+        url('/pezas/fondo.jpg');
+
+    /* Ajustes para que la foto se vea perfecta */
+    background-size: cover;       /* Ocupa todo el espacio sin deformarse */
+    background-position:center 50%;  /* Centra la parte más importante de la foto */
+    background-attachment: fixed; /* Opcional: Hace el efecto parallax (la foto se queda quieta al bajar) */
+    
+    /* Ajustes de forma del contenedor */
+    padding: 120px 20px;
+    text-align: center;
+    color: var(--blanco); /* Letras blancas obligatorias para que se lean */
+    border-radius: 0 0 15px 15px;
+
+
+
+
+
+
+
     color: var(--blanco);
     text-align: center;
     padding: 80px 20px;
@@ -232,7 +256,7 @@ body {
     /* Un borde gris muy clarito de fondo */
     border: 5px solid #e2e8f0; 
     /* El borde de arriba lleva tu color rojo de acento para que destaque */
-    border-top: 5px solid #5b8ed1 ; 
+    border-top: 5px solid #a1a5ac ; 
     border-radius: 50%; /* Esto lo hace redondo */
     /* La magia: le decimos que gire infinitamente */
     animation: girar 1s linear infinite; 
@@ -255,4 +279,19 @@ body {
 @keyframes latido {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.5; }
+}
+
+
+
+.tarjeta-noticia:hover {
+    transform: translateY(-8px);
+    cursor: pointer; 
+    transition: transform 0.3s ease;
+}
+
+.enlace-tarjeta-entera1 {
+    text-decoration: none; /* Quita el subrayado */
+    color: inherit; /* Respeta los colores que ya teníamos (título azul, fecha gris) */
+    display: block; /* Hace que el enlace ocupe todo el espacio de la tarjeta */
+    height: 100%;
 }

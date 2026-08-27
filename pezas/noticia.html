@@ -25,10 +25,12 @@
 
     <!-- CONTENEDOR DEL ARTÍCULO -->
     <main class="contenedor-principal" style="display: block;">
-        <a href="/" class="btn-volver">← Volver al inicio</a>
+        <a href="javascript:history.back()" class="btn-volver">← Volver</a>
         
         <div id="caja-articulo">
-            <p>⏳ Cargando el comunicado...</p>
+               <div class="caja-cargando">
+    <div class="spinner"></div>
+</div>
         </div>
     </main>
 
@@ -72,7 +74,7 @@
                         cajaArticulo.innerHTML = `
                             <article class="articulo-completo">
                                 <h2>${noticiaEncontrada.Titulo}</h2>
-                                <p class="fecha">Publicado el: ${noticiaEncontrada.Fecha}</p>
+                                <p class="fecha">Publicado o: ${noticiaEncontrada.Fecha}</p>
                                 <div class="contenido-texto">
                                     <p>${textoFormateado}</p>
                                 </div>

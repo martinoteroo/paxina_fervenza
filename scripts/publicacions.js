@@ -38,15 +38,16 @@
         // Recorremos el lote
         lote.forEach(function(noticia) {
             let textoSeguro = noticia.Texto ? noticia.Texto : "";
-            let textoResumen = textoSeguro.substring(0, 120) + "...";
+            let textoResumen = textoSeguro.substring(0, 300) + "...";
 
             contenidoHTML += `
                 <article class="tarjeta-noticia">
-                    <h3>${noticia.Titulo}</h3>
-                    <p><small> ${noticia.Fecha}</small></p>
-                    <p>${textoResumen}</p>
-                    <br>
-                    <a href="noticia.html?id=${noticia.ID}" class="btn-principal" style="font-size: 0.9rem; padding: 8px 15px;">Leer comunicado completo</a>
+                    <a href="/pezas/noticia.html?id=${noticia.ID}" class="enlace-tarjeta-entera1">
+                        <h3>${noticia.Titulo}</h3>
+                        <p><small> ${noticia.Fecha}</small></p>
+                        <p>${textoResumen}</p>
+                        <br>
+                    </a>
                 </article>
             `;
         }); // <-- Aquí es donde estaba el fallo de las llaves. Esto cierra el forEach.
