@@ -94,7 +94,7 @@ body {
             rgba(0, 0, 0, 0.95)     /* Casi negro abajo del todo */
         ),
         /* 2. Capa inferior: La foto */
-        url('/pezas/fondo.jpg');
+        url('pezas/fondo.jpg');
 
     /* Ajustes para que la foto se vea perfecta */
     background-size: cover;       /* Ocupa todo el espacio sin deformarse */
