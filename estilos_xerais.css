@@ -2,13 +2,13 @@
    1. COLORES Y CONFIGURACIÓN BÁSICA
    ========================================= */
 :root {
-    --color-principal: #0d4117; /* Verde fervenza */
+    --color-principal: #18822c; /* Verde fervenza */
     --color-acento: #496ea5;    /* Rojo fuerte para destacar (botones) */
     --color-fondo: #F8FAFC;     /* Gris muy clarito para el fondo */
     --color-texto: #333333;
     --blanco: #dfdfdf;
-    --color-fondo-tarjeta: #ccd6c8;
-    --color-fondo-cabecera: #99a594;
+    --color-fondo-tarjeta: #e5ffdc;
+    --color-fondo-cabecera: #e5ffdc;
 }
 
 * {
@@ -30,7 +30,7 @@ body {
    2. CABECERA Y MENÚ (FLEXBOX)
    ========================================= */
 .cabecera-principal {
-    background-color: var(--color-fondo-cabecera);
+    background-color: var(--color-fondo);
     display: flex;
     justify-content: space-between; /* Separa el logo a la izq y menú a la der */
     align-items: center;
@@ -94,8 +94,8 @@ body {
     background: 
         /* 1. Capa superior: Degradado de verde oscuro a negro (0.85 es la opacidad) */
         linear-gradient(
-            rgba(20, 50, 30, 0.85), /* Verde muy oscuro arriba */
-            rgba(0, 0, 0, 0.95)     /* Casi negro abajo del todo */
+            rgba(20, 50, 30, 0.8), /* Verde muy oscuro arriba */
+            rgba(1, 51, 0, 0.95)     /* Casi negro abajo del todo */
         ),
         /* 2. Capa inferior: La foto */
         url('pezas/fondo.jpg');
