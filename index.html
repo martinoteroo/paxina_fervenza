@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fervenza</title>
-    
+    <link rel="stylesheet" href="estilos-voceiro.css">
     <!-- Estilos xerais -->
     <link rel="stylesheet" href="estilos_xerais.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -31,17 +31,61 @@
         
         <!-- SECCIÓN DE NOTICIAS -->
         <section id="noticias" class="seccion-noticias">
-            <h2>Últimos Comunicados</h2>
+            <h2>Últimas publicacións</h2>
             
             <!-- Único contenedor donde JavaScript inyectará las noticias -->
             <div id="contenedor-noticias" class="grid-noticias">
                 <div class="caja-cargando">
                     <div class="spinner"></div>
                 </div>
+               
             </div>
         </section>
+        <div class="seccion-leer-mas">
+            <p>Buscas comunicados anteriores ou novas máis antigas?</p>
+            <a href="publicacions.html" class="btn-secundario">Ver todas as publicacións</a>
+        </div>
+        <style>
+                        .seccion-leer-mas {
+                text-align: center;
+                margin-top: 10px;
+                padding: 10px;
+                background-color: #F8FAFC; /* El gris suave de tu paleta */
+                border-radius: 8px;
+                border: 1px solid #E2E8F0; /* Un borde sutil muy elegante */
+            }
 
-        <!-- BARRA LATERAL (Enlaces rápidos) -->
+            .seccion-leer-mas p {
+                margin: 0 0 15px 0;
+                color: #1E293B; /* Tu color oscuro principal */
+                font-size: 1.05rem;
+            }
+
+            /* Estilo para el botón de leer más */
+            .btn-secundario {
+                display: inline-block;
+                background-color: var(--color-acento); /* Tu azul eléctrico */
+                color: white;
+                padding: 10px 20px;
+                border-radius: 6px;
+                text-decoration: none;
+                font-weight: 600;
+                transition: background-color 0.2s ease, transform 0.2s ease;
+            }
+
+            .btn-secundario:hover {
+                background-color: #0369a1; /* Un azul un poco más oscuro al pasar el ratón */
+                transform: translateY(-2px);
+}
+        </style>
+        <div id="contenedor-revistas" class="grid-revistas">
+            <!-- Animación de carga -->
+            <div class="caja-cargando">
+                <div class="spinner"></div>
+               
+            </div>
+        </div>
+        <!-- BARRA LATERAL xa non e lateral pero bueno saludos non penso cambiar o tag -->
         <aside id="barra-lateral">
             <!-- Tu contenido de la barra lateral aquí -->
         </aside>
@@ -56,6 +100,7 @@
         <!-- 1. Cargamos el motor de PapaParse -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
+<script src="scripts/voceiroprevia.js"></script> <!-- Aquí asumimos que tienes el cargador del menú y footer -->
 <!-- 2. Nuestro código personalizado -->
 <script>  // Previsualizacion de las ultimas 3 noticias 
     // Tu enlace largo del Excel (terminado en pub?output=csv)
@@ -75,7 +120,7 @@
             let noticiasNuevas = noticiasValidas.reverse();
 
             // 3. Cortamos la lista para quedarnos SOLO con las 3 primeras (Ideal para la portada)
-            let ultimasTres = noticiasNuevas.slice(0, 4);
+            let ultimasTres = noticiasNuevas.slice(0, 2);
 
             let cajaPrincipal = document.getElementById("contenedor-noticias");
             let contenidoHTML = "";

@@ -326,7 +326,7 @@ body {
 }
 .contenedor-imaxe img {
     width: 100%;
-    height: 35vh;
+    height: 300px;
     object-fit: cover;
     display: block;
     align-items: center;
