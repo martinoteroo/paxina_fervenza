@@ -151,9 +151,9 @@ body {
 .contenedor-principal {
     display: grid;
     /* Divide la pantalla: 2 partes para noticias, 1 parte para barra lateral */
-    grid-template-columns: 2fr 1fr; 
+    grid-template-columns: 1fr; 
     gap: 40px;
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 50px auto;
     padding: 0 20px;
 }
@@ -213,14 +213,15 @@ body {
         flex-direction: column;
         gap: 15px;
         padding: 20px;
+        border-radius: 0 0 15px 15px;
     }
 
-    /* Menú: Pone los enlaces en forma de columna (uno debajo de otro) */
+    /* Menú: Pone los enlaces en forma de columna (uno debajo de otro) 
     .menu-principal ul {
         flex-direction: column;
         width: 100%;
         gap: 15px;
-    }
+    }*/
 
     /* Cambia la estructura Grid a 1 sola columna.
        Así la barra lateral cae abajo del todo y no se aplasta. */

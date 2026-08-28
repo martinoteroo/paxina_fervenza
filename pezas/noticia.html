@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comunicado - Sindicato S.I.T.</title>
     <link rel="stylesheet" href="../estilos_xerais.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* Unos pequeños ajustes extra para que el artículo grande se vea bonito */
@@ -42,11 +43,12 @@
         const idBuscado = parametrosURL.get('id');
 
         // Tu enlace de Google Sheets
-        const enlaceExcel = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRV68SLA6ujZ0jgGkiknu16IUsFDcZtter5q1ZGy-8MLMckzSi76WrQMI0Yv_sYOLe5svMvrFLbk7o4/pub?output=csv";
+        // Le añadimos el truco de los milisegundos para forzar a Google a darte el dato fresco
+const enlaceExcel = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRV68SLA6ujZ0jgGkiknu16IUsFDcZtter5q1ZGy-8MLMckzSi76WrQMI0Yv_sYOLe5svMvrFLbk7o4/pub?output=csv" + "&t=" + Date.now();
 
         // 2. Si alguien entra a noticia.html sin un ID, le avisamos
         if (!idBuscado) {
-            document.getElementById("caja-articulo").innerHTML = "<p>❌ Error: No se ha especificado ninguna noticia para leer.</p>";
+            document.getElementById("caja-articulo").innerHTML = "<p> Error: Especifique unha noticia ou artigo para ler.</p>";
         } else {
             // 3. Conectamos al Excel
             Papa.parse(enlaceExcel, {
@@ -56,7 +58,9 @@
                     let todasLasNoticias = resultados.data;
 
                     // 4. Buscamos EXACTAMENTE la fila que tenga el ID que buscamos
-                    let noticiaEncontrada = todasLasNoticias.find(noticia => noticia.ID === idBuscado);
+                    // Usamos '==' en lugar de '===' para que ignore si es texto o número, 
+// y le ponemos .trim() por si se coló algún espacio en el Excel
+let noticiaEncontrada = todasLasNoticias.find(noticia => noticia.ID && noticia.ID.trim() == idBuscado);
 
                     let cajaArticulo = document.getElementById("caja-articulo");
 
@@ -84,7 +88,7 @@
                             </article>
                         `;
                     } else {
-                        cajaArticulo.innerHTML = "<p>❌ Lo sentimos, no hemos encontrado este comunicado. Puede que haya sido borrado.</p>";
+                        cajaArticulo.innerHTML = "<p> Sentímolo, comunicado non atopado, é posible que xa non exista.</p>";
                     }
                 }
             });
