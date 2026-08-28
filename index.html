@@ -22,41 +22,34 @@
         <div class="hero-contenido">
             <h2>Organízate e loita!!</h2>
             <p>Se Galiza fose o país dos mil ríos, nos quixeramos ser a súa máis alta Fervenza.</p>
-            <a href="#" class="btn-principal">Milita</a>
+            <a href="contacto.html" class="btn-principal">Milita</a>
         </div>
-    </section>
+        </section>
 
-    <!-- CONTENIDO PRINCIPAL -->
+    <!-- CONTENIDO PRINCIPAL (Todo lo que va entre el menú y el footer) -->
     <main class="contenedor-principal">
         
-        <!-- SECCIÓN DE NOTICIAS (Aquí actuará tu JavaScript después) -->
+        <!-- SECCIÓN DE NOTICIAS -->
         <section id="noticias" class="seccion-noticias">
             <h2>Últimos Comunicados</h2>
-            <div id="contenedor-noticias" class="grid-noticias">
-    <div class="caja-cargando">
-    <div class="spinner"></div>
-</div>
-</div>
             
-            
-            <!-- Este es el contenedor vacío que rellenará el Excel -->
+            <!-- Único contenedor donde JavaScript inyectará las noticias -->
             <div id="contenedor-noticias" class="grid-noticias">
-                <!-- Por ahora ponemos una noticia estática de ejemplo para que puedas ir dándole estilos en tu CSS -->
-                
+                <div class="caja-cargando">
+                    <div class="spinner"></div>
+                </div>
             </div>
         </section>
 
         <!-- BARRA LATERAL (Enlaces rápidos) -->
-        
-        <div id="barra-lateral">
-        </div>
+        <aside id="barra-lateral">
+            <!-- Tu contenido de la barra lateral aquí -->
+        </aside>
 
     </main>
 
     <!-- PIE DE PÁGINA -->
     <div id="contenedor-footer"></div>
-
-    <!-- Más adelante pegaremos aquí abajo el <script> de PapaParse y el Excel -->
 
 
 
@@ -82,32 +75,39 @@
             let noticiasNuevas = noticiasValidas.reverse();
 
             // 3. Cortamos la lista para quedarnos SOLO con las 3 primeras (Ideal para la portada)
-            let ultimasTres = noticiasNuevas.slice(0, 3);
+            let ultimasTres = noticiasNuevas.slice(0, 4);
 
             let cajaPrincipal = document.getElementById("contenedor-noticias");
             let contenidoHTML = "";
 
-            // 4. Dibujamos el HTML por cada noticia
+            // 4. Debuxamos o html por noticia 
             ultimasTres.forEach(function(noticia) {
                 
-                // Hacemos un resumen del texto para no saturar la portada (corta a los 220 caracteres)
-                let textoResumen = noticia.Texto.substring(0, 220) + "...";
+                // Resumo do texto orixinal para a tarxeta 
+                let textoResumen = noticia.Texto.substring(0, 420) + "...";
 
                 contenidoHTML += `
                     <article class="tarjeta-noticia">
                         <a href="pezas/noticia.html?id=${noticia.ID}" class="enlace-tarjeta-entera1">
-                        <h3>${noticia.Titulo}</h3>
-                        <p><small> ${noticia.Fecha}</small></p>
-                        <p>${textoResumen}</p>
                         
+                        <div class="contido-noticia">
+                            <div class="contenedor-imaxe">
+                                <img src="${noticia.Imagen}" alt="Imagen da noticia">
+                            </div>
+                            <div class="contido-texto">
+                                <h3>${noticia.Titulo}</h3>
+                                <i><p class="data-publicacion">Publicado o: ${noticia.Fecha}</p></i>
+                                <p>${textoResumen}</p>
+                            </div>    
+                        </div>
                         <!-- MAGIA: El botón apunta a noticia.html pasándole el ID exacto -->
-                        <br>
+                        
                         </a>
                     </article>
                 `;
             });
 
-            // Sustituimos el "Cargando..." por las tarjetas reales
+           //metemos as caixas reales de noticias yea
             cajaPrincipal.innerHTML = contenidoHTML;
         }
     });

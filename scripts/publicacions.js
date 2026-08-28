@@ -42,13 +42,22 @@
 
             contenidoHTML += `
                 <article class="tarjeta-noticia">
-                    <a href="pezas/noticia.html?id=${noticia.ID}" class="enlace-tarjeta-entera1">
-                        <h3>${noticia.Titulo}</h3>
-                        <p><small> ${noticia.Fecha}</small></p>
-                        <p>${textoResumen}</p>
-                        <br>
-                    </a>
-                </article>
+                        <a href="pezas/noticia.html?id=${noticia.ID}" class="enlace-tarjeta-entera1">
+                        
+                        <div class="contido-noticia">
+                            <div class="contenedor-imaxe">
+                                <img src="${noticia.Imagen}" alt="Imagen da noticia">
+                            </div>
+                            <div class="contido-texto">
+                                <h3>${noticia.Titulo}</h3>
+                                <i><p class="data-publicacion">Publicado o: ${noticia.Fecha}</p></i>
+                                <p>${textoResumen}</p>
+                            </div>    
+                        </div>
+                        <!-- MAGIA: El botón apunta a noticia.html pasándole el ID exacto -->
+                        
+                        </a>
+                    </article>
             `;
         }); // <-- Aquí es donde estaba el fallo de las llaves. Esto cierra el forEach.
 
