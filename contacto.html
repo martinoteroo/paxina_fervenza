@@ -16,6 +16,90 @@
 
     <!-- Hueco para el menú común -->
     <div id="contenedor-menu"></div>
+    <div class="tarjeta-contacto">
+    <h2>Formulario de contacto</h2>
+    <p>Se tes interés en militar con nós, ou simplemente queres saber máis sobre as nosas accións, non dubides en mandarnos un correo electrónico.</p>
+
+    <!-- Usamos un servicio gratuito como Formspree (reemplaza TU_ENDPOINT_AQUÍ con tu enlace) -->
+    <form action="https://formspree.io/f/meaogwjy" method="POST" class="formulario-contacto">
+        
+        <div class="grupo-formulario">
+            <label for="nombre">O teu nome:</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Ex: Juan Pérez">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="email">O teu correo electrónico:</label>
+            <input type="email" id="email" name="email" required placeholder="correo@exemplo.com">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="mensaje">Contido:</label>
+            <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Escribe aquí a túa mensaxe"></textarea>
+        </div>
+
+        <button type="submit" class="btn-enviar">Enviar Mensaxe</button>
+    </form>
+</div>
+
+<style>
+    /* Estilos integrados con tu paleta */
+    .tarjeta-contacto {
+        background-color: var(--blanco);
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 40px auto;
+    }
+    .tarjeta-contacto h2 {
+        color: var(--color-principal);
+        margin-bottom: 10px;
+    }
+    .tarjeta-contacto p {
+        color: var(--color-texto);
+        margin-bottom: 25px;
+    }
+    .grupo-formulario {
+        margin-bottom: 20px;
+    }
+    .grupo-formulario label {
+        display: block;
+        font-weight: bold;
+        color: var(--color-principal);
+        margin-bottom: 8px;
+    }
+    .grupo-formulario input,
+    .grupo-formulario textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        background-color: #ffffff;
+    }
+    .grupo-formulario input:focus,
+    .grupo-formulario textarea:focus {
+        outline: none;
+        border-color: var(--color-principal);
+        box-shadow: 0 0 0 3px rgba(24, 130, 44, 0.15);
+    }
+    .btn-enviar {
+        background-color: #496ea5;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .btn-enviar:hover {
+        background-color: #12631f; /* Un verde un poco más oscuro para el hover */
+    }
+</style>
     <div id="contenedor-footer"></div>
     <script src="scripts/xeral.js"></script>
 </body>

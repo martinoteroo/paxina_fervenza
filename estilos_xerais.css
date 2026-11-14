@@ -2,23 +2,29 @@
    1. COLORES Y CONFIGURACIÓN BÁSICA
    ========================================= */
 :root {
-    --color-principal: #18822c; /* Verde fervenza */
+    --color-principal: #10521c; /* Verde fervenza */
     --color-acento: #496ea5;    /* Rojo fuerte para destacar (botones) */
     --color-fondo: #F8FAFC;     /* Gris muy clarito para el fondo */
     --color-texto: #333333;
-    --blanco: #dfdfdf;
+    --blanco: white;
     --color-fondo-tarjeta: #e5ffdc;
-    --color-fondo-cabecera: #e5ffdc;
+    --color-fondo-cabecera: #e5ffdc;    
 }
+
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Creepster&display=swap');
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Arimo', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+}
+
+body {
     background-color: var(--color-fondo);
     color: var(--color-texto);
     line-height: 1.6;
@@ -227,6 +233,8 @@ body {
         gap: 15px;
         padding: 20px;
         border-radius: 0 0 15px 15px;
+        font-size: 0.9rem; /* Ajusta el tamaño de fuente para móviles */
+       
     }
 
     /* Menú: Pone los enlaces en forma de columna (uno debajo de otro) 
@@ -393,3 +401,28 @@ body {
         object-fit: cover;
     }
 }
+
+
+
+
+
+
+
+          .logo-img {
+    height: 40px;          /* Altura fija ideal para que encaje en una barra de navegación */
+    width: auto;           /* Ancho automático para que mantenga sus proporciones originales */
+    display: block;
+    transition: opacity 0.2s ease;
+}
+
+.logo-img:hover {
+    opacity: 0.85;
+}
+
+/* Adaptación para móviles por si en pantallas pequeñas se ve muy apretado */
+@media (max-width: 600px) {
+    .logo-img {
+        height: 32px; /* Un poco más pequeño en móviles */
+    }
+}
+  
