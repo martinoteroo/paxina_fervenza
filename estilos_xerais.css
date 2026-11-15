@@ -22,7 +22,7 @@
 
 
 body {
-    font-family: 'Arimo', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family:"Helvetica Neue", Helvetica, sans-serif;
     font-weight: 500;
 }
 
@@ -119,16 +119,12 @@ body {
     color: var(--blanco); /* Letras blancas obligatorias para que se lean */
     border-radius: 0 0 15px 15px;
 
-
-
-
-
-
 /*importo montserrat que es la fuente de organizate e loita*/
     color: var(--blanco);
     text-align: center;
     padding: 80px 20px;
 }
+
 
 .hero h2 {
     font-size: 2.5rem;
@@ -137,10 +133,9 @@ body {
     /* Crea un resplandor difuminado alrededor y sobre las letras */
    
 }
-
 #aqui {
     font-family: 'Montserrat', sans-serif !important;
-    font-weight: 800 !important;
+    font-weight: 600 !important;
 }
 .hero p {
     font-size: 1.2rem;

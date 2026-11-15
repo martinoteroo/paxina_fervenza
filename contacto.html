@@ -16,9 +16,47 @@
 
     <!-- Hueco para el menú común -->
     <div id="contenedor-menu"></div>
+
+    
+    <style>
+    .redes {
+        display: flex;
+        flex-direction: column; /* Coloca el título arriba y los iconos abajo */
+        justify-content: center; /* Centra verticalmente si hay espacio */
+        align-items: center; /* Centra horizontalmente */
+        text-align: center;
+        padding: 20px;
+        background-color: var(--color-fondo-cabecera);
+        color: rgb(29, 24, 24);
+    }
+
+    .redes h2 {
+        margin-bottom: 15px; /* Espacio entre el título y los iconos */
+    }
+
+    .redes-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px; /* Separación más moderna entre los iconos en lugar de margin */
+    }
+
+    .redes-links a {
+        color: rgb(7, 6, 6);
+        text-decoration: none;
+
+        margin: 0 20px; /* Espaciado horizontal entre los iconos */
+        font-size: 3rem;
+        transition: all 0.3s ease; /* Hace que el movimiento sea suave */
+    }
+
+    .redes-links a:hover {
+        color: var(--color-acento);
+        transform: translateY(-5px); /* Corregido: antes ponía transalateY */
+    }
+</style>
     <div class="tarjeta-contacto">
     <h2>Formulario de contacto</h2>
-    <p>Se tes interés en militar con nós, ou simplemente queres saber máis sobre as nosas accións, non dubides en mandarnos un correo electrónico.</p>
+    <p>Se tes interés en militar con nós, ou simplemente queres saber máis sobre as nosas accións, non dubides en mandarnos un correo electrónico mediante o seguinte formulario. Tamén podes escribirnos directamente ao correo: <i>fervenza.estudantil@gmail.com</i>.</p>
 
     <!-- Usamos un servicio gratuito como Formspree (reemplaza TU_ENDPOINT_AQUÍ con tu enlace) -->
     <form action="https://formspree.io/f/meaogwjy" method="POST" class="formulario-contacto">
@@ -100,6 +138,13 @@
         background-color: #12631f; /* Un verde un poco más oscuro para el hover */
     }
 </style>
+<div class="tarjeta-contacto redes">
+    <h2>Redes Sociais</h2>
+        <div class="redes-links">
+            <a href="https://www.instagram.com/fervenza.estudantil" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.x.com/fervenza.estudantil" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+    </div>
     <div id="contenedor-footer"></div>
     <script src="scripts/xeral.js"></script>
 </body>
